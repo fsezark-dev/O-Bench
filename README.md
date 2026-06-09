@@ -39,7 +39,7 @@ Maximize total value of selected items without exceeding a weight capacity.
 
 ### TSP — 20 Cities
 
-![TSP 20 Cities Convergence](results/tsp_20cities/convergence_20cities.png)
+![TSP 20 Cities Convergence](convergence_20cities.png)
 
 | Algorithm | Best | Mean | Std | Avg Runtime |
 |---|---|---|---|---|
@@ -51,7 +51,7 @@ Maximize total value of selected items without exceeding a weight capacity.
 
 ### TSP — 50 Cities
 
-![TSP 50 Cities Convergence](results/tsp_50cities/convergence_50cities.png)
+![TSP 50 Cities Convergence](convergence_50cities.png)
 
 | Algorithm | Best | Mean | Std | Avg Runtime |
 |---|---|---|---|---|
