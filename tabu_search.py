@@ -27,8 +27,7 @@ class TabuSearch:
             best_candidate = None
             best_candidate_score = float("inf")
 
-            for _ in range(50):  # neighborhood size
-
+            for _ in range(50):
                 candidate = problem.neighbor(current)
 
                 candidate_key = tuple(candidate)
