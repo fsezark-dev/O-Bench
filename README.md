@@ -37,7 +37,7 @@ Maximize total value of selected items without exceeding a weight capacity.
 
 ## Results
 
-### TSP — 20 Cities
+### TSP - 20 Cities
 
 ![TSP 20 Cities Convergence](convergence_20cities.png)
 
@@ -49,7 +49,7 @@ Maximize total value of selected items without exceeding a weight capacity.
 | Genetic Algorithm | 361.00 | 388.94 | 27.85 | 1.2400s |
 | Tabu Search | 356.61 | 363.50 | 12.23 | 0.1992s |
 
-### TSP — 50 Cities
+### TSP - 50 Cities
 
 ![TSP 50 Cities Convergence](convergence_50cities.png)
 
@@ -61,7 +61,7 @@ Maximize total value of selected items without exceeding a weight capacity.
 | Genetic Algorithm | 750.36 | 858.87 | 64.86 | 3.3073s |
 | Tabu Search | 661.68 | 735.97 | 48.24 | 0.4088s |
 
-### Knapsack — 100 Items
+### Knapsack - 100 Items
 
 > Scores are negative because the framework minimizes by convention — more negative = higher value selected.
 
@@ -75,7 +75,7 @@ Maximize total value of selected items without exceeding a weight capacity.
 | Genetic Algorithm | 2999 | 2753.20 | 148.07 | 1.0299s |
 | Tabu Search | 3309 | 3224.43 | 51.05 | 0.2400s |
 
-> Random Search mean excluded — high variance from penalty-inflated scores on overweight solutions indicates RS rarely finds feasible solutions consistently at this capacity setting.
+> Random Search mean excluded, high variance from penalty-inflated scores on overweight solutions indicates RS rarely finds feasible solutions consistently at this capacity setting.
 
 ---
 
@@ -86,11 +86,11 @@ Maximize total value of selected items without exceeding a weight capacity.
 - **Genetic Algorithm** produces competitive quality but runs ~250× slower than single-solution methods at small scales.
 - **Simulated Annealing** requires an iteration budget proportional to problem size. With a fixed 1000-iteration budget it underperforms Hill Climbing at 50 cities despite theoretical superiority — a direct consequence of insufficient exploration time post-escape.
 - **SA cooling schedule** was made adaptive: initial temperature is estimated by sampling random neighbor deltas to target ~80% acceptance early on; cooling rate is computed so temperature reaches `T=1.0` by the final iteration.
-- **Random Search** degrades sharply with scale — gap vs best algorithm grows from ~2× at 20 cities to ~3× at 50 cities.
+- **Random Search** degrades sharply with scale, gap vs best algorithm grows from ~2× at 20 cities to ~3× at 50 cities.
 
 ### Knapsack
-- **Tabu Search** dominates with a mean value of 2996.90 and std of just 35.85 — nearly optimal and highly consistent across all 30 runs.
-- **Simulated Annealing** outperforms Genetic Algorithm on both best and mean value at this scale, reversing the TSP ranking — the binary search space suits SA's bit-flip neighborhood well.
+- **Tabu Search** dominates with a mean value of 2996.90 and std of just 35.85, nearly optimal and highly consistent across all 30 runs.
+- **Simulated Annealing** outperforms Genetic Algorithm on both best and mean value at this scale, reversing the TSP ranking, the binary search space suits SA's bit-flip neighborhood well.
 - **Random Search** fails to find reliably feasible solutions at 30% capacity, producing erratic scores due to frequent capacity violations.
 
 ---
@@ -133,13 +133,13 @@ pip install matplotlib pandas numpy
 
 **Run TSP benchmark:**
 ```bash
-python problems/tsp.py
+python -m problems.tsp
 # Enter number of cities when prompted (e.g. 20, 50, 100)
 ```
 
 **Run Knapsack benchmark:**
 ```bash
-python problems/knapsack.py
+python -m problems.knapsack
 ```
 
 Results (convergence plot + CSV) are saved automatically to `results/`.
@@ -168,13 +168,3 @@ This makes adding new algorithms or problem domains straightforward — no chang
 - **Statistics reported:** Best, Mean, Std Dev, Average Runtime per trial
 - **TSP cities:** Randomly generated on a 100×100 integer grid
 - **Knapsack:** 100 items, weights ∈ [1, 50], values ∈ [10, 100], capacity = 30% of total weight
-
----
-
-## Future Work
-
-- Scale TSP to 100 and 200 cities for full scalability analysis
-- Add optimality gap metric (vs exact DP solution for small TSP)
-- Confidence bands (±1 std dev) on convergence plots
-- Additional problems: Job Shop Scheduling, Graph Coloring
-- Hyperparameter sensitivity analysis for SA and GA
