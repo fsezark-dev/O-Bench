@@ -5,8 +5,7 @@ def average_history(histories):
 
     for i in range(iterations):
         avg.append(
-            sum(history[i] for history in histories)
-            / len(histories)
+            sum(history[i] for history in histories)/ len(histories)
         )
 
     return avg
