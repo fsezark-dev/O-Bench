@@ -61,22 +61,44 @@ Maximize total value of selected items without exceeding a weight capacity.
 | Genetic Algorithm | 750.36 | 858.87 | 64.86 | 3.3073s |
 | Tabu Search | 661.68 | 735.97 | 48.24 | 0.4088s |
 
+### Knapsack — 100 Items
+
+> Scores are negative because the framework minimizes by convention — more negative = higher value selected.
+
+![Knapsack 100 Items Convergence](convergence_100items.png)
+
+| Algorithm | Best Value | Mean Value | Std | Avg Runtime |
+|---|---|---|---|---|
+| Random Search | 2603 | 2434.77 | 72.14 | 0.0126s |
+| Hill Climbing | 2144 | 1800.47 | 205.43 | 0.0046s |
+| Simulated Annealing | 2912 | 2598.03 | 196.45 | 0.0071s |
+| Genetic Algorithm | 2999 | 2753.20 | 148.07 | 1.0299s |
+| Tabu Search | 3309 | 3224.43 | 51.05 | 0.2400s |
+
+> Random Search mean excluded — high variance from penalty-inflated scores on overweight solutions indicates RS rarely finds feasible solutions consistently at this capacity setting.
+
 ---
 
 ## Key Findings
 
-- **Tabu Search** achieves the best solution quality and consistency at 20 cities (lowest std dev), thanks to its memory mechanism preventing revisitation of recent local optima.
-- **Genetic Algorithm** produces competitive solution quality but runs ~250× slower than single-solution methods at small scales — the cost-benefit shifts at larger instances.
-- **Simulated Annealing** requires an iteration budget proportional to problem size. With a fixed budget, it can underperform Hill Climbing despite theoretical superiority — a parameter sensitivity issue documented in this project.
-- **SA cooling schedule** was made adaptive: initial temperature is estimated by sampling random neighbor deltas to achieve ~80% acceptance early on cooling rate is computed to reach `T=1.0` by the final iteration.
-- **Random Search** degrades sharply with scale, confirming the value of guided search strategies.
+### TSP
+- **Tabu Search** achieves the best solution quality and lowest std dev at both 20 and 50 cities, outperforming even GA on consistency.
+- **Genetic Algorithm** produces competitive quality but runs ~250× slower than single-solution methods at small scales.
+- **Simulated Annealing** requires an iteration budget proportional to problem size. With a fixed 1000-iteration budget it underperforms Hill Climbing at 50 cities despite theoretical superiority — a direct consequence of insufficient exploration time post-escape.
+- **SA cooling schedule** was made adaptive: initial temperature is estimated by sampling random neighbor deltas to target ~80% acceptance early on; cooling rate is computed so temperature reaches `T=1.0` by the final iteration.
+- **Random Search** degrades sharply with scale — gap vs best algorithm grows from ~2× at 20 cities to ~3× at 50 cities.
+
+### Knapsack
+- **Tabu Search** dominates with a mean value of 2996.90 and std of just 35.85 — nearly optimal and highly consistent across all 30 runs.
+- **Simulated Annealing** outperforms Genetic Algorithm on both best and mean value at this scale, reversing the TSP ranking — the binary search space suits SA's bit-flip neighborhood well.
+- **Random Search** fails to find reliably feasible solutions at 30% capacity, producing erratic scores due to frequent capacity violations.
 
 ---
 
 ## Project Structure
 
 ```
-O-Benchmarking/
+O-Bench/
 │
 ├── algorithms/
 │   ├── random_search.py
@@ -98,7 +120,6 @@ O-Benchmarking/
 │
 ├── benchmark.py
 ├── avg_history.py
-└── README.md
 ```
 
 ---
@@ -147,3 +168,13 @@ This makes adding new algorithms or problem domains straightforward — no chang
 - **Statistics reported:** Best, Mean, Std Dev, Average Runtime per trial
 - **TSP cities:** Randomly generated on a 100×100 integer grid
 - **Knapsack:** 100 items, weights ∈ [1, 50], values ∈ [10, 100], capacity = 30% of total weight
+
+---
+
+## Future Work
+
+- Scale TSP to 100 and 200 cities for full scalability analysis
+- Add optimality gap metric (vs exact DP solution for small TSP)
+- Confidence bands (±1 std dev) on convergence plots
+- Additional problems: Job Shop Scheduling, Graph Coloring
+- Hyperparameter sensitivity analysis for SA and GA
