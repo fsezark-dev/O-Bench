@@ -55,13 +55,11 @@ Maximize total value of selected items without exceeding a weight capacity.
 
 | Algorithm | Best | Mean | Std | Avg Runtime |
 |---|---|---|---|---|
-| Random Search | — | — | — | — |
-| Hill Climbing | — | — | — | — |
-| Simulated Annealing | — | — | — | — |
-| Genetic Algorithm | — | — | — | — |
-| Tabu Search | — | — | — | — |
-
-> Fill in 50-city results after running benchmarks.
+| Random Search | 1941.62 | 2244.34 | 101.30 | 0.0120s |
+| Hill Climbing | 965.32 | 1155.85 | 83.05 | 0.0076s |
+| Simulated Annealing | 1081.93 | 1242.11 | 94.87 | 0.0108s |
+| Genetic Algorithm | 750.36 | 858.87 | 64.86 | 3.3073s |
+| Tabu Search | 661.68 | 735.97 | 48.24 | 0.4088s |
 
 ---
 
@@ -70,7 +68,7 @@ Maximize total value of selected items without exceeding a weight capacity.
 - **Tabu Search** achieves the best solution quality and consistency at 20 cities (lowest std dev), thanks to its memory mechanism preventing revisitation of recent local optima.
 - **Genetic Algorithm** produces competitive solution quality but runs ~250× slower than single-solution methods at small scales — the cost-benefit shifts at larger instances.
 - **Simulated Annealing** requires an iteration budget proportional to problem size. With a fixed budget, it can underperform Hill Climbing despite theoretical superiority — a parameter sensitivity issue documented in this project.
-- **SA cooling schedule** was made adaptive: initial temperature is estimated by sampling random neighbor deltas to achieve ~80% acceptance early on; cooling rate is computed to reach `T=1.0` by the final iteration.
+- **SA cooling schedule** was made adaptive: initial temperature is estimated by sampling random neighbor deltas to achieve ~80% acceptance early on cooling rate is computed to reach `T=1.0` by the final iteration.
 - **Random Search** degrades sharply with scale, confirming the value of guided search strategies.
 
 ---
