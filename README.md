@@ -101,6 +101,7 @@ Maximize total value of selected items without exceeding a weight capacity.
 O-Bench/
 │
 ├── algorithms/
+│   ├── __init__.py
 │   ├── random_search.py
 │   ├── hill_climbing.py
 │   ├── simulated_annealing.py
