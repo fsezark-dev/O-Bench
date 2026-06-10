@@ -63,7 +63,8 @@ Maximize total value of selected items without exceeding a weight capacity.
 
 ### Knapsack - 100 Items
 
-> Scores are negative because the framework minimizes by convention — more negative = higher value selected.
+
+> Scores are negative because the framework minimizes by convention, more negative = higher value selected.
 
 ![Knapsack 100 Items Convergence](convergence_100items.png)
 
@@ -84,7 +85,7 @@ Maximize total value of selected items without exceeding a weight capacity.
 ### TSP
 - **Tabu Search** achieves the best solution quality and lowest std dev at both 20 and 50 cities, outperforming even GA on consistency.
 - **Genetic Algorithm** produces competitive quality but runs ~250× slower than single-solution methods at small scales.
-- **Simulated Annealing** requires an iteration budget proportional to problem size. With a fixed 1000-iteration budget it underperforms Hill Climbing at 50 cities despite theoretical superiority — a direct consequence of insufficient exploration time post-escape.
+- **Simulated Annealing** requires an iteration budget proportional to problem size. With a fixed 1000-iteration budget it underperforms Hill Climbing at 50 cities despite theoretical superiority, a direct consequence of insufficient exploration time post-escape.
 - **SA cooling schedule** was made adaptive: initial temperature is estimated by sampling random neighbor deltas to target ~80% acceptance early on; cooling rate is computed so temperature reaches `T=1.0` by the final iteration.
 - **Random Search** degrades sharply with scale, gap vs best algorithm grows from ~2× at 20 cities to ~3× at 50 cities.
 
@@ -158,7 +159,7 @@ problem.neighbor(solution)  # return perturbed solution
 problem.crossover(p1, p2)   # combine two solutions (GA)
 ```
 
-This makes adding new algorithms or problem domains straightforward — no changes to existing code required.
+This makes adding new algorithms or problem domains straightforward, no changes to existing code required.
 
 ---
 
