@@ -121,7 +121,7 @@ O-Bench/
 │   └── knapsack_100items/
 │
 ├── benchmark.py
-├── avg_history.py
+└── avg_history.py
 ```
 
 ---
