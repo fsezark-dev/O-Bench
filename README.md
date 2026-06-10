@@ -177,8 +177,8 @@ This makes adding new algorithms or problem domains straightforward, no changes 
 
 Planned additions include:
 
-- Particle Swarm Optimization (PSO)
-- Ant Colony Optimization (ACO)
+- Particle Swarm Optimization
+- Ant Colony Optimization
 - Differential Evolution
 - Multi-objective optimization benchmarks
 - Statistical significance testing
