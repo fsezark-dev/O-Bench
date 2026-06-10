@@ -170,3 +170,17 @@ This makes adding new algorithms or problem domains straightforward, no changes 
 - **Statistics reported:** Best, Mean, Std Dev, Average Runtime per trial
 - **TSP cities:** Randomly generated on a 100×100 integer grid
 - **Knapsack:** 100 items, weights ∈ [1, 50], values ∈ [10, 100], capacity = 30% of total weight
+
+---
+
+## Future Work
+
+Planned additions include:
+
+- Particle Swarm Optimization (PSO)
+- Ant Colony Optimization (ACO)
+- Differential Evolution
+- Multi-objective optimization benchmarks
+- Statistical significance testing
+- Parallel execution support
+- Additional NP-hard problems
